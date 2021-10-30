@@ -48,5 +48,20 @@ public class BankAccount {
 
     public void deposit(double amount) {
         this.accountBalance = this.accountBalance.add(BigDecimal.valueOf(amount));
+        this.lastTransaction = new Transaction(amount, TransactionType.DEPOSIT);
+    }
+
+    public void withdraw(double amount) {
+        this.accountBalance = this.accountBalance.subtract(BigDecimal.valueOf(amount));
+        this.lastTransaction = new Transaction(amount, TransactionType.WITHDRAWAL);
+    }
+
+    /**
+     * Checks to see if amount to withdraw is lower than current balance
+     * @param amount - amount to withdraw
+     * @return true if amount is lower, false if it is not
+     */
+    public boolean canWithdraw(double amount) {
+        return this.accountBalance.compareTo(BigDecimal.valueOf(amount)) == 1;
     }
 }

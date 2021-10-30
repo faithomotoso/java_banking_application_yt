@@ -1,6 +1,7 @@
 import models.BankAccount;
 import services.AccountBalanceService;
 import services.DepositService;
+import services.WithdrawalService;
 import util.Printer;
 
 import java.text.NumberFormat;
@@ -38,6 +39,7 @@ public class BankingApplication {
 
                 case '3' -> {
                     // Run withdrawal operation
+                    WithdrawalService.runWithdrawal(bankAccount, scanner);
                 }
 
                 case '4' -> {

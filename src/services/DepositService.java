@@ -3,6 +3,7 @@ package services;
 import models.BankAccount;
 import util.Printer;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class DepositService {
@@ -10,7 +11,13 @@ public class DepositService {
     public static void runDeposit(BankAccount bankAccount, Scanner scanner) {
         try {
             System.out.print("Enter amount to deposit: ");
-            double amountToDeposit = Double.parseDouble(scanner.nextLine());
+            String line = scanner.nextLine();
+
+            if (line.equalsIgnoreCase("q")) {
+                return;
+            }
+
+            double amountToDeposit = Double.parseDouble(line);
 
             if (amountToDeposit < 0) {
                 throw new Exception("Amount can't be negative");
