@@ -6,7 +6,7 @@ public class BankAccount {
     private String customerName;
     private String accountNumber;
     private String pin = "1244"; // Default pin
-    private final BigDecimal accountBalance = BigDecimal.ZERO;
+    private BigDecimal accountBalance = BigDecimal.valueOf(39939.91);
     private Transaction lastTransaction;
 
     public BankAccount(String customerName, String accountNumber) {
@@ -44,5 +44,9 @@ public class BankAccount {
 
     public Transaction getLastTransaction() {
         return this.lastTransaction;
+    }
+
+    public void deposit(double amount) {
+        this.accountBalance = this.accountBalance.add(BigDecimal.valueOf(amount));
     }
 }

@@ -1,12 +1,14 @@
 import models.BankAccount;
+import services.AccountBalanceService;
+import services.DepositService;
 import util.Printer;
 
-import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class BankingApplication {
+
     public static void main(String[] args) {
 
         BankAccount bankAccount = new BankAccount("Frank Castle", "1994881994");
@@ -14,18 +16,24 @@ public class BankingApplication {
         char option = 0;
         System.out.println("Welcome " + bankAccount.getCustomerName() +"!\n");
 
+
         Scanner scanner = new Scanner(System.in);
 
         do {
+            showOptions();
+
             option = scanner.nextLine().toLowerCase().charAt(0);
+            System.out.println();
 
             switch (option) {
                 case '1' -> {
                     // Print account balance
+                    AccountBalanceService.displayAccountBalance(bankAccount);
                 }
 
                 case '2' -> {
                     // Run deposit operation
+                    DepositService.runDeposit(bankAccount, scanner);
                 }
 
                 case '3' -> {
@@ -36,15 +44,24 @@ public class BankingApplication {
                     // View last transaction
                 }
 
+                case 'q' -> {
+                    Printer.printDashLine();
+                    System.out.println("Thank you! Have a nice day!");
+                    Printer.printDashLine();
+                }
+
                 default -> {
                     System.out.println();
                 }
             }
+            System.out.println();
 
         } while (option != 'q');
+
+        scanner.close();
     }
 
-    void showOptions() {
+    static void showOptions() {
         String[] options = {
                 "1. Check balance",
                 "2. Deposit",
@@ -58,4 +75,5 @@ public class BankingApplication {
         Arrays.stream(options).forEach(System.out::println);
         Printer.printEqualsLine();
     }
+
 }
