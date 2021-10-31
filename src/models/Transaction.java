@@ -1,6 +1,7 @@
 package models;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 
 public class Transaction {
@@ -16,7 +17,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return transactionType + "\n" + "Amount: " + this.amount + "\n" +
+        return transactionType + "\n" + "Amount: " + NumberFormat.getInstance().format(this.amount) + "\n" +
                 "Date: " + transactionDate;
     }
 }

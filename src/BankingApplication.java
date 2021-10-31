@@ -1,6 +1,7 @@
 import models.BankAccount;
 import services.AccountBalanceService;
 import services.DepositService;
+import services.LastTransactionService;
 import services.WithdrawalService;
 import util.Printer;
 
@@ -15,7 +16,7 @@ public class BankingApplication {
         BankAccount bankAccount = new BankAccount("Frank Castle", "1994881994");
 
         char option = 0;
-        System.out.println("Welcome " + bankAccount.getCustomerName() +"!\n");
+        System.out.println("Welcome " + bankAccount.getCustomerName() + "!\n");
 
 
         Scanner scanner = new Scanner(System.in);
@@ -27,23 +28,23 @@ public class BankingApplication {
             System.out.println();
 
             switch (option) {
-                case '1' -> {
-                    // Print account balance
-                    AccountBalanceService.displayAccountBalance(bankAccount);
-                }
+                case '1' ->
+                        // Print account balance
+                        AccountBalanceService.displayAccountBalance(bankAccount);
 
-                case '2' -> {
-                    // Run deposit operation
-                    DepositService.runDeposit(bankAccount, scanner);
-                }
 
-                case '3' -> {
-                    // Run withdrawal operation
-                    WithdrawalService.runWithdrawal(bankAccount, scanner);
-                }
+                case '2' ->
+                        // Run deposit operation
+                        DepositService.runDeposit(bankAccount, scanner);
+
+                case '3' ->
+                        // Run withdrawal operation
+                        WithdrawalService.runWithdrawal(bankAccount, scanner);
+
 
                 case '4' -> {
                     // View last transaction
+                    LastTransactionService.displayLastTransaction(bankAccount);
                 }
 
                 case 'q' -> {

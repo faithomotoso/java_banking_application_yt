@@ -3,6 +3,7 @@ package services;
 import models.BankAccount;
 import util.Printer;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -26,7 +27,7 @@ public class DepositService {
             bankAccount.deposit(amountToDeposit);
 
             Printer.printDashLine();
-            System.out.println("You just deposited " + amountToDeposit);
+            System.out.println("You just deposited " + NumberFormat.getInstance().format(amountToDeposit));
             Printer.printDashLine();
 
 
