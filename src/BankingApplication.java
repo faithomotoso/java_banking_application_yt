@@ -1,11 +1,7 @@
 import models.BankAccount;
-import services.AccountBalanceService;
-import services.DepositService;
-import services.LastTransactionService;
-import services.WithdrawalService;
+import services.*;
 import util.Printer;
 
-import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -15,7 +11,7 @@ public class BankingApplication {
 
         BankAccount bankAccount = new BankAccount("Frank Castle", "1994881994");
 
-        char option = 0;
+        char option;
         System.out.println("Welcome " + bankAccount.getCustomerName() + "!\n");
 
 
@@ -27,39 +23,44 @@ public class BankingApplication {
             option = scanner.nextLine().toLowerCase().charAt(0);
             System.out.println();
 
-            switch (option) {
-                case '1' ->
-                        // Print account balance
-                        AccountBalanceService.displayAccountBalance(bankAccount);
+            // To exit the application
+            if (option == 'q') {
+                Printer.printDashLine();
+                System.out.println("Thank you! Have a nice day!");
+                Printer.printDashLine();
+                break;
+            }
+
+            // For every transaction, authenticate
+            if (PinAuthService.authenticate(bankAccount, scanner))
+                switch (option) {
+                    case '1' ->
+                            // Print account balance
+                            AccountBalanceService.displayAccountBalance(bankAccount);
 
 
-                case '2' ->
-                        // Run deposit operation
-                        DepositService.runDeposit(bankAccount, scanner);
+                    case '2' ->
+                            // Run deposit operation
+                            DepositService.runDeposit(bankAccount, scanner);
 
-                case '3' ->
-                        // Run withdrawal operation
-                        WithdrawalService.runWithdrawal(bankAccount, scanner);
+                    case '3' ->
+                            // Run withdrawal operation
+                            WithdrawalService.runWithdrawal(bankAccount, scanner);
 
 
-                case '4' -> {
-                    // View last transaction
-                    LastTransactionService.displayLastTransaction(bankAccount);
+                    case '4' ->
+                            // View last transaction
+                            LastTransactionService.displayLastTransaction(bankAccount);
+
+
+                    default -> System.out.println("Invalid option. Try again.");
                 }
-
-                case 'q' -> {
-                    Printer.printDashLine();
-                    System.out.println("Thank you! Have a nice day!");
-                    Printer.printDashLine();
-                }
-
-                default -> {
-                    System.out.println();
-                }
+            else {
+                break;
             }
             System.out.println();
 
-        } while (option != 'q');
+        } while (true);
 
         scanner.close();
     }

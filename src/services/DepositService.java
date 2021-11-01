@@ -4,7 +4,6 @@ import models.BankAccount;
 import util.Printer;
 
 import java.text.NumberFormat;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class DepositService {
