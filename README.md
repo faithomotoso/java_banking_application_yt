@@ -2,3 +2,5 @@
 Attempt to replicate a cli banking application in Java
 
 #### Built with Java 16
+
+Default pin is `1244`
