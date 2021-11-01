@@ -11,6 +11,7 @@ public class WithdrawalService {
             System.out.print("Enter amount to withdraw: ");
 
             String line = scanner.nextLine();
+            System.out.println();
 
             if (line.equalsIgnoreCase("q")) {
                 return;

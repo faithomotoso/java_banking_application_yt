@@ -9,6 +9,8 @@ public class BankingApplication {
 
     public static void main(String[] args) {
 
+        boolean run = true;
+
         BankAccount bankAccount = new BankAccount("Frank Castle", "1994881994");
 
         char option;
@@ -17,7 +19,7 @@ public class BankingApplication {
 
         Scanner scanner = new Scanner(System.in);
 
-        do {
+        while(run) {
             showOptions();
 
             option = scanner.nextLine().toLowerCase().charAt(0);
@@ -31,36 +33,41 @@ public class BankingApplication {
                 break;
             }
 
-            // For every transaction, authenticate
-            if (PinAuthService.authenticate(bankAccount, scanner))
-                switch (option) {
-                    case '1' ->
-                            // Print account balance
-                            AccountBalanceService.displayAccountBalance(bankAccount);
+            switch (option) {
+                case '1', '2', '3', '4' -> {
+                    // For every transaction, authenticate
+                    if (PinAuthService.authenticate(bankAccount, scanner)) {
+                        switch (option) {
+                            case '1' ->
+                                    // Print account balance
+                                    AccountBalanceService.displayAccountBalance(bankAccount);
 
 
-                    case '2' ->
-                            // Run deposit operation
-                            DepositService.runDeposit(bankAccount, scanner);
+                            case '2' ->
+                                    // Run deposit operation
+                                    DepositService.runDeposit(bankAccount, scanner);
 
-                    case '3' ->
-                            // Run withdrawal operation
-                            WithdrawalService.runWithdrawal(bankAccount, scanner);
-
-
-                    case '4' ->
-                            // View last transaction
-                            LastTransactionService.displayLastTransaction(bankAccount);
+                            case '3' ->
+                                    // Run withdrawal operation
+                                    WithdrawalService.runWithdrawal(bankAccount, scanner);
 
 
-                    default -> System.out.println("Invalid option. Try again.");
+                            case '4' ->
+                                    // View last transaction
+                                    LastTransactionService.displayLastTransaction(bankAccount);
+
+                        }
+                    }
+                    else {
+                        // break doesn't, work most likely because of the inner switch
+                        run = false;
+                    }
                 }
-            else {
-                break;
+                default -> System.out.println("Invalid option. Try again.");
             }
             System.out.println();
 
-        } while (true);
+        }
 
         scanner.close();
     }

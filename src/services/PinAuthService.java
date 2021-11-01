@@ -44,6 +44,7 @@ public class PinAuthService {
             }
             catch (Exception e) {
                 System.out.println(e.getLocalizedMessage());
+                System.out.println();
             }
 
             numberOfTries++;

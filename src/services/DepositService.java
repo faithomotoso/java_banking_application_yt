@@ -12,6 +12,7 @@ public class DepositService {
         try {
             System.out.print("Enter amount to deposit: ");
             String line = scanner.nextLine();
+            System.out.println();
 
             if (line.equalsIgnoreCase("q")) {
                 return;
@@ -30,7 +31,6 @@ public class DepositService {
             Printer.printDashLine();
 
 
-            System.out.println();
             AccountBalanceService.displayAccountBalance(bankAccount);
 
         } catch (NumberFormatException e) {
