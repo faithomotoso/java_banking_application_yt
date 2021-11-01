@@ -63,7 +63,11 @@ public class BankingApplication {
                         run = false;
                     }
                 }
-                default -> System.out.println("Invalid option. Try again.");
+                default -> {
+                    Printer.printDashLine();
+                    System.out.println("Invalid option. Try again.");
+                    Printer.printDashLine();
+                }
             }
             System.out.println();
 

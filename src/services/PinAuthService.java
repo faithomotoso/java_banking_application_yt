@@ -1,6 +1,7 @@
 package services;
 
 import models.BankAccount;
+import util.Printer;
 
 import java.util.Scanner;
 
@@ -33,9 +34,12 @@ public class PinAuthService {
 
                 if (bankAccount.verifyPin(pinInput))
                     return true;
-                else if (MAX_TRIES - numberOfTries > 0)
+                else if (MAX_TRIES - numberOfTries > 0) {
+                    Printer.printDashLine();
                     System.out.println("Incorrect pin! You have " + (MAX_TRIES - numberOfTries) +
                             " attempt(s) left");
+                    Printer.printDashLine();
+                }
 
                 System.out.println();
 
@@ -49,8 +53,9 @@ public class PinAuthService {
 
             numberOfTries++;
         }
-
-        System.out.println("You've maxed out the number of attempts.\nPlease try again later\n");
+        Printer.printDashLine();
+        System.out.println("You've maxed out the number of attempts.\nPlease try again later");
+        Printer.printDashLine();
         return false;
 
     }
